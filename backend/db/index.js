@@ -4,11 +4,9 @@ const { mongo_url } = require("../config");
 mongoose.connect(mongo_url);
 
 const Alumni = require("./models/alumniModel");
-const Article = require("./models/articleModel");
-const News = require("../models/newsModel");
+const Content = require("./models/contentModel");
 
 module.exports = {
     Alumni,
-    Article,
-    News
+    Content
 }
