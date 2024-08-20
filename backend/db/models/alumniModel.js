@@ -14,6 +14,6 @@ const alumniSchema = new mongoose.Schema({
     }
 })
 
-const Alumni = new mongoose.Schema('Alumni', alumniSchema);
+const Alumni = mongoose.model('Alumni', alumniSchema);
 
 module.exports = Alumni;

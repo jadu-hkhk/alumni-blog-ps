@@ -1,17 +1,52 @@
 const { Router } = require("express");
+const { Content, Alumni } = require("../db/index");
 const router = Router();
 
-router.get("/posts", (req, res) => {
-    //all posts view
+router.get("/blog", async (req, res) => {
+    //all blog view
+    const blogs = await Content.find({
+        type: "blog"
+    })
+    res.json({
+        blogs: blogs
+    })
+
 });
 
+router.get("/content/:contentId", async (req, res) => {
+    //specific/single content view
+    const contentId = req.params.contentId;
 
-router.get("/posts/:id", (req, res) => {
-    //specific/single post view
+    const content = await Content.findOne({
+        _id: contentId
+    })
+
+    // const author = await Alumni.findOne({
+    //     _id: content.author
+    // });
+
+    // const username = author.username;
+    if (content) {
+        res.json({
+            content: content,
+            // username: username
+        })
+    }
+    else {
+        res.status(404).json({
+            message: "content not found"
+        })
+    }
 });
 
-router.get("/news", (req, res) => {
+router.get("/news", async (req, res) => {
     //all news view
+    const news = await Content.find({
+        type: "news"
+    })
+    res.json({
+        news: news
+    })
 });
 
 module.exports = router;

@@ -76,8 +76,13 @@ router.post("/publish", authMiddleware, async (req, res) => {
     //blog section publish logic
     const title = req.body.title;
     const description = req.body.description;
-    const author = req.email;
+    const email = req.email;
     const type = req.body.type;
+    const user = await Alumni.findOne({
+        email
+    })
+
+    const author = user._id;
 
     await Content.create({
         title,
@@ -89,37 +94,6 @@ router.post("/publish", authMiddleware, async (req, res) => {
     res.status(201).json({
         message: "Content created successfully"
     })
-});
-
-router.get("/blog", async (req, res) => {
-    //all blog view
-    const blogs = await Content.find({
-        type: "blog"
-    })
-    res.json({
-        blogs: blogs
-    })
-
-});
-
-router.get("/content/:contentId", async (req, res) => {
-    //specific/single content view
-    const contentId = req.params.contentId;
-
-    const content = await Content.findOne({
-        _id: contentId
-    })
-
-    if (content) {
-        res.json({
-            content: content
-        })
-    }
-    else {
-        res.status(404).json({
-            message: "content not found"
-        })
-    }
 });
 
 router.delete("/content/:contentId", authMiddleware, async (req, res) => {
@@ -147,16 +121,5 @@ router.delete("/content/:contentId", authMiddleware, async (req, res) => {
     }
 });
 
-router.get("/news", async (req, res) => {
-    //all news view
-    const news = await Content.find({
-        type: "news"
-    })
-    res.json({
-        news: news
-    })
-});
 
 module.exports = router;
-
-//optional: usermanegement(update/ view profile)
