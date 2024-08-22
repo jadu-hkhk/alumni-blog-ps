@@ -16,7 +16,8 @@ export default function Signin({ setIsAuthenticated }) {
         }).then(function (response) {
             localStorage.setItem('token', response.data.token);
             setIsAuthenticated(true);
-            navigate("/");
+            toast(response.data.message)
+            setTimeout(() => { navigate("/"); }, 3000)
         }).catch((e) => toast(e.response.data.message))
     }
 
@@ -31,7 +32,7 @@ export default function Signin({ setIsAuthenticated }) {
             newestOnTop={false}
             theme='dark'
         />
-        <div className='flex flex-col items-center justify-center '>
+        <div className='flex flex-col items-center justify-center h-screen'>
             <div className='w-full max-w-sm p-6 bg-gray-200 rounded-lg shadow-md'>
                 <img src="https://alumni-cell-yearbook-portal-1.vercel.app/images/1.png" alt="alumni cell logo" className='w-20 mx-auto mb-6 rounded-xl drop-shadow-md' />
                 <h1 className='text-2xl font-semibold text-center mb-6 text-gray-800'>Sign In</h1>

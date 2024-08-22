@@ -12,10 +12,12 @@ function authMiddleware(req, res, next) {
             req.email = decodedValue.email;
             next();
         } else {
-            res.status(401).send("Unauthorized");
+            res.status(401).json({
+                message: "Unauthorized"
+            });
         }
     } catch (err) {
-        res.status(401).send("Unauthorized");
+        res.status(401).json({ message: "Unauthorized" });
     }
 }
 

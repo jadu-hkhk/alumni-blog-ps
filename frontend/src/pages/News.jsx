@@ -32,7 +32,7 @@ function NewsItem({ title, description, id }) {
         <div className='relative bg-gray-100 p-6 rounded-lg shadow shadow-gray-800 hover:shadow-lg hover:shadow-gray-600 transition-shadow duration-300 transform hover:scale-105 transition-transform duration-300'>
             <h1 className='text-xl text-gray-800 font-semibold mb-4'>{title}</h1>
             <h2 className='text-gray-600 mb-4 break-words'>{description.length > 150 ? `${description.slice(0, 150)}...` : description}</h2>
-            <a href={`/News/${id}`} className='text-blue-500 hover:text-blue-700 font-medium absolute bottom-4 right-4 transform hover:scale-105 transition-transform duration-300'>Read More</a>
+            <a href={`/Content/${id}`} className='text-blue-500 hover:text-blue-700 font-medium absolute bottom-4 right-4 transform hover:scale-105 transition-transform duration-300'>Read More</a>
         </div>
     )
 }

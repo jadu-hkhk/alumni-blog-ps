@@ -36,7 +36,7 @@ export default function Signup() {
             newestOnTop={false}
             theme="dark"
         />
-        <div className='flex flex-col items-center justify-center '>
+        <div className='flex flex-col items-center justify-center h-screen'>
             <div className='w-full max-w-sm p-6 bg-gray-200 rounded-lg shadow-md'>
                 <img
                     src="https://alumni-cell-yearbook-portal-1.vercel.app/images/1.png"

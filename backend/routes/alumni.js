@@ -64,7 +64,10 @@ router.post("/signin", async (req, res) => {
 
     if (user) {
         const token = jwt.sign({ email }, JWT_SECRET);
-        res.json({ token })
+        res.json({
+            token: token,
+            message: "Signed In Succesfully"
+        })
     } else {
         res.status(401).send({
             message: "Incorrect email or password"
@@ -90,6 +93,11 @@ router.post("/publish", authMiddleware, async (req, res) => {
         author,
         type
     })
+        .catch((e) => {
+            res.status(400).json({
+                message: e
+            })
+        })
 
     res.status(201).json({
         message: "Content created successfully"
@@ -99,26 +107,28 @@ router.post("/publish", authMiddleware, async (req, res) => {
 router.delete("/content/:contentId", authMiddleware, async (req, res) => {
     //specific/single content delete
     const contentId = req.params.contentId;
-    const author = req.email;
+    const userEmail = req.email;
 
     const content = await Content.findOne({
         _id: contentId
-    })
+    }).populate('author');
 
-    if (content.author.toString() != author) {
-        return res.status(403).json({ message: "you are not authorized to delete the following content" });
-    }
-
-    if (content) {
-        await Content.deleteOne({
-            _id: contentId
-        })
-    }
-    else {
-        res.status(404).json({
+    if (!content) {
+        return res.status(404).json({
             message: "content not found"
         })
     }
+    if (content.author.email != userEmail) {
+        return res.status(403).json({ message: "You are Not Authorized to Delete the following Content" });
+    }
+
+    await Content.deleteOne({
+        _id: contentId
+    })
+
+    res.status(200).json({
+        message: "Content Deleted Succesfully"
+    })
 });
 
 

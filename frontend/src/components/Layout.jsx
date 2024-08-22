@@ -3,9 +3,9 @@ import Topbar from "./Topbar";
 
 export default function Layout({ setIsAuthenticated, isAuthenticated }) {
     return (
-        <div className="bg-custom-dark min-h-screen flex flex-col">
+        <div className="bg-custom-dark min-h-screen flex flex-col overflow-x-hidden">
             <Topbar setIsAuthenticated={setIsAuthenticated} isAuthenticated={isAuthenticated} />
-            <main className="flex-grow flex items-center justify-center">
+            <main className="flex-grow ">
                 <Outlet />
             </main>
         </div>
