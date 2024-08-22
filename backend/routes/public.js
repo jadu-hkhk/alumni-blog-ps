@@ -21,15 +21,9 @@ router.get("/content/:contentId", async (req, res) => {
         _id: contentId
     })
 
-    // const author = await Alumni.findOne({
-    //     _id: content.author
-    // });
-
-    // const username = author.username;
     if (content) {
         res.json({
             content: content,
-            // username: username
         })
     }
     else {

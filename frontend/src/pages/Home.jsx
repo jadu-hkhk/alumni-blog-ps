@@ -1,10 +1,4 @@
-import { useEffect } from 'react';
-
 export default function Home() {
-    useEffect(() => {
-        document.title = "Home - Alumni Cell"; // Set the page title
-    }, []);
-
     return (
         <div className='min-h-screen w-full p-6 md:p-14 text-gray-100'>
             <div className='flex flex-col items-center justify-center text-center mb-12'>
